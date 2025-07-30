@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pedido Especial</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(270deg, #ff8dc7, #8dc7ff, #a18dff, #ff8dd2);
+      background-size: 800% 800%;
+      animation: gradient 20s ease infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      padding: 0 20px;
+    }
+
+    #messageBox {
+      max-width: 600px;
+      padding: 20px;
+      font-size: 1.2rem;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      margin-bottom: 30px;
+      transition: all 1s ease;
+    }
+
+    .controls {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #ffffff30;
+      color: white;
+      font-size: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    button:hover {
+      background-color: #ffffff50;
+    }
+
+    #btnNao {
+      position: absolute;
+    }
+
+    #final {
+      display: none;
+      font-size: 1.8rem;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 20px;
+    }
+
+    #homeLink {
+      margin-top: 40px;
+      font-size: 1rem;
+      color: white;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="titulo"></h1>
+  <div id="messageBox"></div>
+
+  <div class="controls">
+    <button onclick="voltarMensagem()">⬅️</button>
+    <button onclick="avancarMensagem()">➡️</button>
+  </div>
+
+  <div id="pedidoEspecial" style="display:none; flex-direction: column; align-items: center;">
+    <div id="final">
+      Você quer dar seu c* 🥯?.<br><br>
+    </div>
+    <br />
+    <button id="btnSim" onclick="respostaSim()">Sim 😳</button>
+    <button id="btnNao" onmouseover="fugir()">Não 🙈</button>
+  </div>
+
+  <div id="homeLink" onclick="voltarHome()">← Voltar para Home</div>
+
+  <script>
+    const nome = sessionStorage.getItem("nomeDaPessoa") || "Amor";
+
+    const mensagens = [
+      `Vida...`,
+      "Depois de tudo que já passamos, a gente continua junto na mesma sintonia..",
+      "Você é muito especial, e eu queria te fazer um pedido...",
+      "O primeiro pedido não foi tão elaborado, mas hoje quero fazer algo diferente...",
+      "A partir de agora, tudo muda... Uma nova fase, um novo capitulo e a mesma historia;"
+    ];
+
+    let index = 0;
+
+    const titulo = document.getElementById("titulo");
+    const box = document.getElementById("messageBox");
+    const pedido = document.getElementById("pedidoEspecial");
+
+    function atualizarMensagem() {
+      box.textContent = mensagens[index];
+      titulo.textContent = `Para você, ${nome}`;
+    }
+
+    function avancarMensagem() {
+      if (index < mensagens.length - 1) {
+        index++;
+        atualizarMensagem();
+      } else {
+        mostrarPedido();
+      }
+    }
+
+    function voltarMensagem() {
+      if (index > 0) {
+        index--;
+        atualizarMensagem();
+      }
+    }
+
+    function mostrarPedido() {
+      box.style.display = "none";
+      document.querySelector(".controls").style.display = "none";
+      pedido.style.display = "flex";
+      document.getElementById("final").style.display = "block";
+    }
+
+    function fugir() {
+      const btnNao = document.getElementById("btnNao");
+      const maxX = window.innerWidth - btnNao.offsetWidth;
+      const maxY = window.innerHeight - btnNao.offsetHeight;
+      const randX = Math.floor(Math.random() * maxX);
+      const randY = Math.floor(Math.random() * maxY);
+      btnNao.style.left = `${randX}px`;
+      btnNao.style.top = `${randY}px`;
+    }
+
+    function respostaSim() {
+      // Redireciona para o vídeo no YouTube
+      window.location.href = "https://youtu.be/NAw7SqHnHLI?si=zHAXbt2PvNSiUSsr";
+    }
+
+    function voltarHome() {
+      window.location.href = "home.html";
+    }
+
+    // Inicia com a primeira mensagem
+    atualizarMensagem();
+  </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aviso e Aceite - Antes do Home</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f9c5d1, #f78ca0);
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .container {
+    background: white;
+    border-radius: 12px;
+    padding: 30px 25px;
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    text-align: center;
+  }
+  h2 {
+    color: #a8345b;
+    margin-bottom: 15px;
+  }
+  p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.4em;
+  }
+  label {
+    display: block;
+    margin-bottom: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+  }
+  input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.3);
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  button {
+    background-color: #a8345b;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: not-allowed;
+    transition: background-color 0.3s;
+    width: 100%;
+  }
+  button.enabled {
+    cursor: pointer;
+    background-color: #f78ca0;
+  }
+  button.enabled:hover {
+    background-color: #cc0066;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Atenção, <span id="userName">Visitante</span>!</h2>
+  <p id="customMessage">
+   Atenção, inicialmente este site estava programado para ser lançado no dia 12 de junho, ou seja, no Dia dos Namorados. Porém, aconteceu um contratempo e precisei adiar o lançamento. Por isso, o site está chegando até você hoje, no seu aniversário.
+
+Pode ser que você estranhe um pouco porque o site fala mais sobre nós, e até sobre mim, do que tanto sobre você, né? Afinal, por ser seu aniversário, o site deveria ser totalmente seu. Mas fica aqui meu esclarecimento.
+
+É isso, te amo, espero que goste!
+  </p>
+
+  <label>
+    <input type="checkbox" id="acceptTerms" />
+    Eu aceito os termos e condições.
+  </label>
+
+  <button id="continueBtn" disabled>Continuar para Home</button>
+</div>
+
+<script>
+  // Pega o nome da URL (exemplo: aviso.html?nome=Bianca)
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  const userNameSpan = document.getElementById('userName');
+  const acceptCheckbox = document.getElementById('acceptTerms');
+  const continueBtn = document.getElementById('continueBtn');
+
+  // Atualiza o nome exibido, se houver
+  const userName = getQueryParam('nome');
+  if (userName) {
+    userNameSpan.textContent = userName;
+  }
+
+  // Habilita botão somente se o checkbox estiver marcado
+  acceptCheckbox.addEventListener('change', () => {
+    if (acceptCheckbox.checked) {
+      continueBtn.disabled = false;
+      continueBtn.classList.add('enabled');
+    } else {
+      continueBtn.disabled = true;
+      continueBtn.classList.remove('enabled');
+    }
+  });
+
+  // Ao clicar em continuar, redireciona para home passando o nome
+  continueBtn.addEventListener('click', () => {
+    if (!acceptCheckbox.checked) return;
+    const nomeParam = userName ? `?nome=${encodeURIComponent(userName)}` : '';
+    window.location.href = `home.html${nomeParam}`;
+  });
+</script>
+
+</body>
+</html>

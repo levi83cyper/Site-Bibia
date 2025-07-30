@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nosso Cantinho 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffe6f0, #ffccf2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 15px;
+      box-sizing: border-box;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .container {
+      background: white;
+      padding: 40px 30px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #e60073;
+      margin-bottom: 5px;
+      font-size: 2rem;
+    }
+
+    #mensagemBemVinda {
+      font-weight: 600;
+      color: #cc0066;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      min-height: 1.5em; /* reserva espaço mesmo sem texto */
+    }
+
+    p {
+      margin-top: 0;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 16px;
+      background: #ff66a3;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background: #cc0066;
+    }
+
+    .button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    /* Link voltar */
+    .link-voltar {
+      margin-top: 15px;
+      display: inline-block;
+      color: #d1006f;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    .link-voltar:hover {
+      color: #ff66a3;
+    }
+
+    /* Responsividade */
+    @media (max-width: 420px) {
+      .container {
+        padding: 30px 20px 20px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      #mensagemBemVinda {
+        font-size: 1rem;
+      }
+
+      .button {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Nosso Cantinho 💌</h1>
+    <div id="mensagemBemVinda"></div>
+    <p>O que você quer ver hoje?</p>
+
+    <button class="button" onclick="acessarPagina('quiz')">❓ Quiz do Amor</button>
+    <button class="button" onclick="acessarPagina('contador')">⏳ Contador de Dias Juntos</button>
+    <button class="button" onclick="acessarPagina('galeria')">🖼️ Galeria de Fotos</button>
+    <button class="button" onclick="verificarAcesso()">💍Meu Pedido</button>
+
+    <a class="link-voltar" href="index.html">← Voltar para o formulário</a>
+  </div>
+
+  <script>
+    // Recupera nome do localStorage para mensagem de boas-vindas
+    const nomeUsuario = localStorage.getItem('nomeUsuario');
+    const mensagemEl = document.getElementById('mensagemBemVinda');
+
+    if (nomeUsuario && nomeUsuario.trim().length > 0) {
+      mensagemEl.textContent = `Seja muito bem-vinda, ${nomeUsuario}! 💖`;
+    } else {
+      mensagemEl.textContent = '';
+    }
+
+    function acessarPagina(pagina) {
+      // Marcar página como visitada no localStorage
+      const visitadas = JSON.parse(localStorage.getItem("paginasVisitadas") || "[]");
+      if (!visitadas.includes(pagina)) {
+        visitadas.push(pagina);
+        localStorage.setItem("paginasVisitadas", JSON.stringify(visitadas));
+      }
+
+      // Redireciona
+      window.location.href = pagina + ".html";
+    }
+
+    function acessarMeuPedido() {
+      const visitadas = JSON.parse(localStorage.getItem("paginasVisitadas") || "[]");
+
+      if (visitadas.length >= 3) {
+        window.location.href = "pedido.html";
+      } else {
+        alert("⚠️ Atenção: Visite pelo menos 3 páginas antes de acessar Meu Pedido!");
+      }
+    }
+
+    function verificarAcesso() {
+    const acessouGaleria = localStorage.getItem('acessouGaleria');
+    const acessouQuiz = localStorage.getItem('acessouQuiz');
+    const acessouContador = localStorage.getItem('acessouContador');
+
+    if (acessouGaleria && acessouQuiz && acessouContador) {
+      location.href = 'pedido.html'; // redireciona pro pedido
+    } else {
+      alert('Você precisa ver todas as surpresas antes do pedido!');
+    }
+  }
+  </script>
+</body>
+</html>

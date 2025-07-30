@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Galeria de Memórias</title>
+  <style>
+    body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #fff0f5;
+  color: #333;
+  text-align: center;
+}
+
+header {
+  background: #ffb6c1;
+  padding: 1rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.home-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+main {
+  padding: 20px;
+}
+
+.ano {
+  margin-bottom: 50px;
+}
+
+.ano h2 {
+  font-size: 1.8rem;
+  color: #c71585;
+}
+
+.resumo-ano {
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  width: 220px;
+  height: 300px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card .face {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.card .frente {
+  background: #fff;
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.card .verso {
+  background: #ffe4e1;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  /* Altura automática */
+  height: auto;
+
+  box-sizing: border-box;
+}
+
+.card.flipped .frente {
+  transform: rotateY(180deg);
+}
+
+.card.flipped .verso {
+  transform: rotateY(360deg);
+}
+
+.card img, .card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Nosso Álbum ❤️</h1>
+    <a href="home.html" class="home-btn">🏠 Voltar ao Início</a>
+  </header>
+
+  <main>
+    <!-- 2021 -->
+    <section class="ano">
+      <h2>2021</h2>
+      <p class="resumo-ano">Bom, 2021 foi um ano sensacional.
+Arrisco dizer que foi o melhor ano da minha vida. Não foi o ano em que eu tive muitas conquistas, eu não trabalhava, eu não fazia curso. Mas eu tive a maior conquista, o maior presente que eu poderia ganhar na minha vida. E foi te conhecer. Então... provavelmente...
+Assim, eu não tinha muita coisa, eu não tinha nem videogame, mas... pra mim foi um ano muito bom. Eu só tenho memórias boas daquele ano.
+E... bom, as três fotos que eu escolhi pra resumir esse ano... poderia escolher qualquer outra foto, várias outras, mas escolhi três fotos meio que aleatórias. Que mostram a gente na sua sala. Que era meio limitado, né? A gente ficava sentado no sofá, a gente não deitava, a gente... meio que, eu não sei dizer, mas a gente não tinha um certo conforto.
+Mas a gente — pelo menos eu — não ligava pra nada disso. Pra mim, só estar ali com você era muito bom.
+A gente se via de segunda a quinta, porque sexta seu pai chegava cedo e final de semana seu pai estava em casa.
+E... pra mim era muito bom. Era muito bom ter você ali.
+Pra mim foi um ano perfeito. Foi muito bom. Só tenho memórias boas</p>
+      <div class="cards-container">
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2021/primeirodia.jpg" alt="Foto 2021 1">
+          </div>
+          <div class="face verso">
+            <p>Não tem como falar de 2021 sem colocar essa foto. Eu acho que essa é, porra, uma das top 10 fotos mais lendárias da humanidade. Entendeu? Essa foto tinha que ser comparada com, porra, com tudo. Acho que essa foto não precisa de muita descrição, não tem muito o que falar. Ela tem poder, tem peso. Se existe aquela teoria que fala sobre a história por trás das imagens, essa foto é a história.</p>
+          </div>
+        </div>
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2021/espelho.jpg" alt="Foto 2021 2">
+          </div>
+          <div class="face verso">
+            <p>Bom, essa foto não é uma das mais bonitas, mas é uma foto boa, eu também gosto dela. Repostaria... acho que eu postei já uma vez, ou não, não lembro. Mas é uma foto boa, é uma foto que resume. Além de ser uma foto bonita, você tá linda nela. É uma foto que tem um valor muito importante, porque ela resume como foi o ano de 2021. Essa foto resume praticamente 90% dos dias de 2021, 90% dos dias que a gente passou junto. Então é uma foto especial, com significado, porque na maioria dos dias daquele ano a gente passou assim. E é claro que, se fosse pra escolher uma foto com significado, 2021 daria um álbum.</p>
+          </div>
+        </div>
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <video src="fotos/2021/video.mp4" controls></video>
+          </div>
+          <div class="face verso">
+            <p>Bom, eu gosto... eu gosto desse vídeo porque foi a primeira vez que a gente foi no shopping. E você tava muito, mas muito linda. Perfeita, perfeita, perfeita mesmo. Maravilhosa. Foi a primeira vez que a gente saiu assim, sozinhos, nosso primeiro date. Então foi especial. Gostei demais.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2022 -->
+    <section class="ano">
+      <h2>2022</h2>
+      <p class="resumo-ano">2022 foi um ano de mudanças.
+Foi um ano em que a gente estava mais maduro. Muito novos ainda, mas mais maduros.
+Foi um ano de evolução. Teve a nossa primeira aliança, teve momentos muito bons.
+A gente começou a trabalhar, estudar, focar um pouco mais, olhar um pouco mais para o futuro, encarar a realidade.
+Acredito que em 2021 a gente não pensava muito no futuro. A gente até pensava, falava em casar, trabalhar, tinha esse desejo...
+Mas eu acho que 2022 foi o ano em que a gente começou a colocar isso em prática, a caminhar de fato pra alcançar nossas metas — pessoais e no relacionamento também.
+E, tipo, o fato de a gente começar a trabalhar acabou fechando uma porta, porque a gente não conseguia mais se ver como antes.
+Antes a gente se via de segunda a quinta, e era até que por bastante tempo.
+Eu lembro que no começo, quando a gente começou a se ver, eu ia pra sua casa à tarde. Depois passei a ir de manhã.
+Então, em 2022 foi isso: uma porta se fechou, mas uma janela se abriu.
+Porque aí surgiu a oportunidade — e a necessidade — de você começar a frequentar mais a minha casa, já que a gente só poderia se ver no final de semana.
+E você vindo mais aqui, começou a ter mais conexão com o Gui, com a minha avó, um pouco com meu pai...
+Começou a ter um pouco mais de ligação com a minha família — que pra mim é muito importante, principalmente a minha avó.
+Acredito que o ano inteiro foi assim: você vindo na minha casa aos domingos, a partir da uma da tarde, ficando até as seis.
+E foi muito bom. A gente assistia filme, tinha dias que a gente fazia brigadeiro...
+Enfim, foi um ano muito bom, de evolução também.
+E meio que deu continuidade no que foi 2021.
+Porque 2021 foi um ano muito intenso, aquele da primeira fase, da paixão de começo.
+E 2022 deu continuidade nisso — porém com um pouco mais de amadurecimento. Nosso.
+</p>
+      <div class="cards-container">
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2022/praia.jpg" alt="Foto 2022 1">
+          </div>
+          <div class="face verso">
+            <p>Bom, esse dia foi da hora, a gente foi pra praia, primeira vez e única que a gente foi pra praia juntinho. Queria ter ficado mais tempo lá..</p>
+          </div>
+        </div>
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2022/alianca.jpg" alt="Foto 2022 2">
+          </div>
+          <div class="face verso">
+            <p>Bom, foto da nossa primeira aliança, a única que eu tenho, não tenho mais foto dela. E a gente tirou essa foto, se eu não me engano, no Habibis. Também a gente saiu aquele ano. A gente tava trabalhando já naquele ano, então a gente já podia sair um pouquinho mais, né?</p>
+          </div>
+        </div>
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2022/laemcasa.jpg" alt="Foto 2022 3">
+          </div>
+          <div class="face verso">
+            <p>Bom, essa foto é importante porque marca uma evolução de 2021 para 2022, quando você começou a frequentar mais a minha casa. E aí, a gente tava deitadinho aí na cama.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2023 -->
+    <section class="ano">
+      <h2>2023</h2>
+      <p class="resumo-ano">Já 2023 foi um ano também muito top.
+A gente já tava bem mais maduro, né?
+A gente já tava naquela fase bem jovem, “trepando”... Enfim, um ano muito legal.
+Pessoalmente falando, pra mim — eu, Levi, como pessoa — não foi um ano muito bom.
+Foi o ano em que minha avó foi embora. Então eu não gosto nem de falar desse ano, porque eu não tenho boas lembranças.
+Eu me lembro que o ano começou muito intenso. Eu com várias metas: cursos, trabalhos e... pô, continuar com você, né?
+Lembro que a gente tinha metas juntos... Enfim.
+Só que aí foi importante eu ter passado por esse momento difícil, porque aí eu pude ver...
+Eu já tinha certeza, mas eu pude ter ainda mais certeza do quão foda você é.
+Você me acolheu.
+Você me deu força.
+Você me protegeu.
+Você... esteve lado a lado comigo no momento mais difícil da minha vida.
+No momento mais difícil da minha vida.
+No momento em que eu achei que não ia conseguir continuar... você esteve aqui o tempo todo comigo. Me deu força.
+Então foi um ano que, assim...
+Foi difícil.
+Eu caí, e você esteve lá pra me levantar.
+Então, enfim...
+É um ano que eu tenho que agradecer por tudo.
+Por tudo.
+
+</p>
+      <div class="cards-container">
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2023/formaatura.jpg" alt="Foto 2023 1">
+          </div>
+          <div class="face verso">
+            <p>Já essa também é uma foto com um peso muito importante, porque você me deu um presente de formatura, foi na minha formatura, e foi um dos momentos... foi um dos dias que eu mais esperei o ano todo por esse dia. Praticamente, a força que eu tirei daquele ano foi pra chegar nesse dia aí.s</p>
+          </div>
+        </div>
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2023/shopping.jpg" alt="Foto 2023 2">
+          </div>
+          <div class="face verso">
+            <p>Bom, essa foto aí não tem nada de especial não. A gente foi no shopping, a gente foi e reassistiu Homem-Aranha, né. Enfim... você tava muito linda naquele dia, como sempre.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2024 -->
+    <section class="ano">
+      <h2>2024</h2>
+      <p class="resumo-ano">Bom, 2024 foi um ano desafiador.
+A gente teve que se reinventar um pouco na questão de se ver.
+A questão de a gente se ver dentro de um relacionamento sempre foi um tabu.
+A gente sempre teve que se desdobrar, dobrar de novo, se reinventar, montar e desmontar, e tentar encaixar na rotina uma forma de estar junto.
+Claro que hoje em dia tá bem mais fácil, né? Graças a Deus.
+Mas até 2024, isso ainda era uma realidade dentro do nosso relacionamento.
+Então até 2024, três anos depois da gente se conhecer, a gente passou praticamente três anos com muita dificuldade de se ver.
+E 2024 não foi diferente.
+Quando minha avó foi embora, a gente teve que se reinventar de novo.
+A gente voltou a se ver na sua casa.
+Se eu não me engano, era aos domingos.
+Enfim, meio que foi aleatório a questão de a gente se ver.
+A gente teve que se reorganizar.
+Teve que recomeçar.
+Isso pegando o finalzinho de 2023 e o comecinho de 2024, né?
+E aí, assim, a gente se reinventou mesmo.
+Começou a dormir mais vezes junto.
+Começou, de fato, a dormir várias vezes junto.
+Estávamos juntos ali... Enfim, mais íntimos.
+Acho que "intimidade" é a palavra certa.
+A gente começou a fazer trepa mais vezes.
+Começou a se conhecer mais, a se conectar mais nesse sentido também.
+Depois de dois, três anos que a gente se conhecia, a gente se tornou mais íntimo.
+E foi um ano muito bom nesse sentido.
+Pessoalmente falando, também foi um ano difícil pra mim.
+Eu perdi meu vo
+Demorei pra me recuperar.
+Ainda tô me recuperando...
+E você, mais uma vez, mostrou ser um anjo na minha vida.
+</p>
+      <div class="cards-container">
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2024/peitos.jpg" alt="Foto 2024 1">
+          </div>
+          <div class="face verso">
+            <p>Ah, esse dia foi doideira, né? Loucura, loucura total. A gente ja tava bem louco aí nessa hora kkkkkkkk você com os peitão aí nessa foto, slc... Só de ver já me deixa daquele jeito.</p>
+          </div>
+        </div>
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2024/festa.jpg" alt="Foto 2024 2">
+          </div>
+          <div class="face verso">
+            <p>Essa foto não tem muito significado, não. Os anos foram passando e a gente foi tirando menos fotos. Mas você tá muito linda nessa foto. Muito, muito, muito.</p>
+          </div>
+        </div>
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2024/casavo.jpg"Foto 2024 3">
+          </div>
+          <div class="face verso">
+            <p>Ah, esse dia foi da hora. A gente foi lá na minha avó, e você tava muito linda. Primeira vez que você foi lá… maravilhosa demais..</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2025 -->
+    <section class="ano">
+      <h2>2025</h2>
+      <p class="resumo-ano">
+E como tá sendo 2025?
+2025 tá sendo um ano muito bom.
+Um ano de aprendizado, de evolução dentro do nosso relacionamento.
+Passamos por momentos difíceis — na verdade, isso foi mais em 2024 —, mas estamos nos recuperando, estamos crescendo juntos.
+E acredito que, de todos os anos, esse foi o que mais sentimos a evolução.
+Pelo menos pra mim, foi o ano que mais senti essa transformação acontecer de verdade.
+Como eu já falei antes, se ver todo dia sempre foi um tabu.
+Sempre teve dificuldade.
+E muito disso era porque eu ainda não conhecia o seu pai.
+Mas a partir do momento em que isso aconteceu, no finalzinho de 2024, tudo mudou.
+Aliás, nem sei como eu esqueci de citar isso antes — porque o dia em que eu conheci o seu pai, pra mim, foi top 5 de momentos mais marcantes da nossa história.
+Acredito de verdade que foi nesse momento que a chave virou no nosso relacionamento.
+Depois que minha avó foi pra Minas, eu me aproximei ainda mais da sua família.
+Sempre tive uma boa relação com todo mundo da sua casa — suas irmãs, sua mãe, todo mundo —, mas agora, minha relação com seu pai também tá sendo muito boa.
+E isso tem feito toda a diferença.
+2025 tá sendo um ano foda por causa disso.
+A grande mudança, o grande pico de evolução, aconteceu quatro anos depois da gente se conhecer.
+Hoje, a gente pode dizer que não tem mais tabu nenhum pra se ver.
+A gente se vê quando quer, dorme junto quando quiser, e tá sendo incrível viver isso. Hoje a gente olha pra tras e da risada de tudo que já passamos.
+Antes, nossas metas eram coisas como:
+“Pô, no próximo ano espero que a gente possa se ver mais.”
+“Espero que futuramente a gente possa dormir junto.”
+“Ter mais intimidade.”
+Agora, nossos planos são outros.
+Hoje a gente pensa:
+“Mais pra frente, a gente vai ter uma casa.”
+“Vamos morar juntos de verdade.”
+E isso não parece mais um sonho distante.
+Hoje, isso tá mais perto do que longe.
+Claro, antigamente a gente já falava em casar, ter filhos, ter uma casa...
+Mas naquela época parecia uma realidade muito distante.
+A gente era novo demais.
+Hoje, não.
+Hoje, essa realidade tá próxima.
+E o mais importante: a gente tem apoio.
+Nada impede a gente — a não ser o fato de a gente ser pobre, né? kkkkk
+Mas fora isso, a gente tá pronto.
+2025 tá sendo sensacional.
+E eu só peço a Deus que continue nos abençoando, nos blindando contra toda maldade do mundo,
+e que a gente continue juntinhos, pra sempre.
+Te amo muito. ❤️
+</p>
+      <div class="cards-container">
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2025/reecontro.jpg" alt="Foto 2025 1">
+          </div>
+          <div class="face verso">
+            <p>Ah, esse dia foi chave, né? A gente ficou quase um mês sem se ver… e aí eu apareci de surpresa. Eu era a surpresa kkkkkk Você acreditou, né? Eu acho que sim. Te amo vida.</p>
+          </div>
+        </div>
+        <div class="card" onclick="virar(this)">
+          <div class="face frente">
+            <img src="fotos/2025/cpa.jpg" alt="Foto 2025 2">
+          </div>
+          <div class="face verso">
+            <p>Ah, já esse também foi um dia especial, porque você passou na CPA, e eu queria te fazer uma surpresa. Eu lá, duro, sem dinheiro, comprei um buquê pra você — mas  esses buquês assim são baratinhos. E você ficou muito feliz… e eu também fiquei, muito mesmo. Te amo demais. E como cada ano que passa a gente vai tirando menos fotos, as que a gente tem acabam sendo só de momentos especiais. Peguei aqui… sei lá, umas oito fotos no ano. Mas as oito são de datas especiais, de algum dia que a gente saiu... doideira kkkkk</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function virar(elemento) {
+  elemento.classList.toggle("flipped");
+}
+ localStorage.setItem('acessouGaleria', 'true');
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nosso Tempo Juntos</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffe6f0, #e6f7ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff3385;
+      margin-bottom: 20px;
+    }
+
+    .tempo p {
+      font-size: 18px;
+      color: #333333;
+      margin: 8px 0;
+    }
+
+    .tempo strong {
+      color: #cc0066;
+    }
+     .home-link {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 28px;
+    text-decoration: none;
+    color: #e60073;
+    transition: color 0.3s ease;
+  }
+
+  .home-link:hover {
+    color: #99004d;
+  }
+  </style>
+</head>
+<body>
+  <a href="home.html" class="home-link" title="Voltar para Home">🏠</a>
+
+  <div class="container">
+    <h1>💖 Estamos juntos há:</h1>
+    <div class="tempo" id="tempo"></div>
+  </div>
+
+  <script>
+    function atualizarContador() {
+      const dataInicio = new Date("2021-02-10T17:00:00");
+      const agora = new Date();
+
+      const milissegundosTotais = agora - dataInicio;
+
+      const segundosTotais = Math.floor(milissegundosTotais / 1000);
+      const minutosTotais = Math.floor(segundosTotais / 60);
+      const horasTotais = Math.floor(minutosTotais / 60);
+      const diasTotais = Math.floor(horasTotais / 24);
+      const semanasTotais = Math.floor(diasTotais / 7);
+      const mesesTotais = Math.floor(diasTotais / 30.44); // média de dias por mês
+      const anosTotais = Math.floor(diasTotais / 365.25);
+
+      const segundosRestantes = segundosTotais % 60;
+      const minutosRestantes = minutosTotais % 60;
+      const horasRestantes = horasTotais % 24;
+
+      document.getElementById("tempo").innerHTML = `
+        <p><strong>${diasTotais}</strong> dias juntos</p>
+        <p><strong>${semanasTotais}</strong> semanas juntos</p>
+        <p><strong>${mesesTotais}</strong> meses juntos</p>
+        <p><strong>${anosTotais}</strong> anos juntos</p>
+        <p><strong>${horasTotais}</strong> horas juntos</p>
+        <p><strong>${minutosTotais}</strong> minutos juntos</p>
+        <p><strong>${segundosTotais}</strong> segundos juntos</p>
+        <hr>
+        <p>Atualizado agora: <strong>${horasRestantes}h ${minutosRestantes}min ${segundosRestantes}s</strong></p>
+      `;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+      localStorage.setItem('acessouContador', 'true');
+
+  </script>
+</body>
+</html>

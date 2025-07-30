@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz do Amor - Versão Atualizada</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f9c5d1, #f78ca0);
+      color: #333;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    header {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin-bottom: 8px;
+      color: #fff;
+      text-shadow: 1px 1px 5px #a8345b;
+    }
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      max-width: 600px;
+      width: 100%;
+      padding: 24px;
+    }
+    .message {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #555;
+    }
+    .question {
+      font-weight: bold;
+      margin-bottom: 12px;
+      font-size: 1.2em;
+      color: #a8345b;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    .options li {
+      margin-bottom: 12px;
+    }
+    label {
+      cursor: pointer;
+      display: block;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 2px solid #f78ca0;
+      transition: background-color 0.3s, color 0.3s;
+      user-select: none;
+    }
+    input[type="radio"] {
+      display: none;
+    }
+    input[type="radio"]:checked + label {
+      background-color: #f78ca0;
+      color: white;
+      border-color: #a8345b;
+    }
+    button {
+      background-color: #a8345b;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: background-color 0.3s;
+    }
+    button:disabled {
+      background-color: #e0a8b5;
+      cursor: not-allowed;
+    }
+    button:hover:not(:disabled) {
+      background-color: #f78ca0;
+    }
+    .actions {
+      text-align: center;
+    }
+    .result {
+      font-size: 1.2em;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #a8345b;
+    }
+    .maze-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .maze {
+      border: 3px solid #a8345b;
+      border-radius: 10px;
+      padding: 10px;
+      max-width: 280px;
+      min-width: 250px;
+      background: #fde8ec;
+    }
+    .maze.correct {
+      background: #defde0;
+      border-color: #28a745;
+      color: #1e4620;
+    }
+    .maze.incorrect {
+      background: #f9d6d5;
+      border-color: #dc3545;
+      color: #5a1a1a;
+    }
+    .maze h3 {
+      margin-top: 0;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.1em;
+    }
+    .maze ul {
+      list-style: none;
+      padding-left: 10px;
+    }
+    .maze ul li {
+      padding: 6px 8px;
+      margin-bottom: 6px;
+      border-left: 4px solid;
+      border-radius: 4px;
+    }
+    .maze.correct ul li {
+      border-color: #28a745;
+    }
+    .maze.incorrect ul li {
+      border-color: #dc3545;
+    }
+    .home-link {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 28px;
+      text-decoration: none;
+      color: #e60073;
+      transition: color 0.3s ease;
+    }
+    .home-link:hover {
+      color: #99004d;
+    }
+  </style>
+</head>
+<body>
+<a href="home.html" class="home-link" title="Voltar para Home">🏠</a>
+
+<header>
+  <h1>Quiz do Amor 💖</h1>
+</header>
+
+<div class="container" id="quiz-container">
+  <div id="intro-screen">
+    <p class="message">
+      Olá, bem-vindo ao quiz!<br />
+      São 7 perguntas, cada uma vale 100/7 pontos.<br />
+      Prove seu amor! ❤️
+    </p>
+    <div class="actions" style="text-align:center;">
+      <button id="start-btn">Começar Quiz</button>
+    </div>
+  </div>
+
+  <div id="question-screen" style="display:none;">
+    <p class="question" id="question-text"></p>
+    <ul class="options" id="options-list"></ul>
+    <div class="actions">
+      <button id="next-btn" disabled>Próxima</button>
+    </div>
+  </div>
+
+  <div id="result-screen" style="display:none;">
+    <p class="result" id="result-message"></p>
+    <div class="maze-container">
+      <div class="maze correct">
+        <h3>Acertou ✅</h3>
+        <ul id="correct-list"></ul>
+      </div>
+      <div class="maze incorrect">
+        <h3>Errou ❌</h3>
+        <ul id="incorrect-list"></ul>
+      </div>
+    </div>
+    <div class="actions" style="margin-top: 30px;">
+      <button id="try-again-btn">Tentar Novamente</button>
+      <button id="go-home-btn">Voltar ao Home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const quizData = [
+  {
+    question: "Qual eu prefiro?",
+    options: ["Bolo de queijo", "Fricassé", "Hamburguer", "Pastel"],
+    answer: 0
+  },
+  {
+    question: "Qual música sempre me lembra você?",
+    options: ["Amor Puro - Djavan", "Ela Vai Voltar - Charlie Brown Jr.", "Longe de Você - Charlie Brown Jr", "Eternamente Feliz - Thiaguinho", "Longe dela - Chris Brown Jr"],
+    answer: 2
+  },
+  {
+    question: "Qual minha série favorita?",
+    options: ["La Casa de Papel", "Visão da Raven", "8 Mile (biografia do Eminem)", "The Walking Dead"],
+    answer: 3
+  },
+  {
+    question: "Qual dessas combinações eu mais gosto?",
+    options: ["Todo Mundo Odeia o Chris & O Maluco no Pedaço","Eu, a Patroa e as Crianças & Chaves","Todo Mundo Odeia o Chris & Eu, a Patroa e as Crianças","Chaves & O Maluco no Pedaço"],
+    answer: 0
+  },
+  {
+    question: "Dos Raps brasileiros abaixo, qual eu mais curto?",
+    options: ["Djonga", "César MC", "Delacruz", "BK"],
+    answer: 1
+  },
+  {
+    question: "Qual combinação internacional eu prefiro?",
+    options: ["Michael Jackson & 2Pac","2Pac & Big","Eminem & Slim Shady","Bon Jovi & Michael Jackson","Eminem & Michael Jackson","Racionais & Vanilla Ice"],
+    answer: 4
+  },
+  {
+    question: "Qual eu prefiro?",
+    options: ["Jogar videogame", "Jogar Bola"],
+    answer: 0
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let userAnswers = [];
+
+const introScreen = document.getElementById("intro-screen");
+const questionScreen = document.getElementById("question-screen");
+const resultScreen = document.getElementById("result-screen");
+
+const questionText = document.getElementById("question-text");
+const optionsList = document.getElementById("options-list");
+const nextBtn = document.getElementById("next-btn");
+
+const resultMessage = document.getElementById("result-message");
+const correctList = document.getElementById("correct-list");
+const incorrectList = document.getElementById("incorrect-list");
+
+document.getElementById("start-btn").onclick = () => {
+  currentQuestion = 0;
+  score = 0;
+  userAnswers = [];
+  introScreen.style.display = "none";
+  questionScreen.style.display = "block";
+  resultScreen.style.display = "none";
+  loadQuestion();
+};
+
+function loadQuestion() {
+  nextBtn.disabled = true;
+  const q = quizData[currentQuestion];
+  questionText.textContent = `${currentQuestion + 1}. ${q.question}`;
+  optionsList.innerHTML = "";
+
+  q.options.forEach((option, i) => {
+    const li = document.createElement("li");
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `option${i}`;
+    input.value = i;
+    input.addEventListener("change", () => nextBtn.disabled = false);
+
+    const label = document.createElement("label");
+    label.htmlFor = input.id;
+    label.textContent = option;
+
+    li.appendChild(input);
+    li.appendChild(label);
+    optionsList.appendChild(li);
+  });
+}
+
+nextBtn.onclick = () => {
+  const selected = document.querySelector('input[name="option"]:checked');
+  if (!selected) return;
+  userAnswers[currentQuestion] = parseInt(selected.value);
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    loadQuestion();
+  } else {
+    showResults();
+  }
+};
+
+function showResults() {
+  questionScreen.style.display = "none";
+  resultScreen.style.display = "block";
+
+  correctList.innerHTML = "";
+  incorrectList.innerHTML = "";
+
+  score = 0;
+  quizData.forEach((q, i) => {
+    if (userAnswers[i] === q.answer) {
+      score += 100 / quizData.length;
+      correctList.innerHTML += `<li>${q.question}</li>`;
+    } else {
+      incorrectList.innerHTML += `<li>${q.question}</li>`;
+    }
+  });
+
+  const percent = Math.round(score);
+  resultMessage.textContent = percent >= 75
+    ? `Parabéns! Você acertou ${percent}% das perguntas. Te amo muito coisa linda! ❤️`
+    : `Você acertou apenas ${percent}%. Tenta novamente, meu amor! 😘`;
+}
+
+document.getElementById("try-again-btn").onclick = () => {
+  currentQuestion = 0;
+  score = 0;
+  userAnswers = [];
+  introScreen.style.display = "none";
+  resultScreen.style.display = "none";
+  questionScreen.style.display = "block";
+  loadQuestion();
+};
+
+document.getElementById("go-home-btn").onclick = () => location.href = "home.html";
+localStorage.setItem('acessouQuiz', 'true');
+</script>
+</body>
+</html>
